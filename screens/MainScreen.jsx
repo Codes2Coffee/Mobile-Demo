@@ -1,42 +1,31 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaView } from "react-native";
+import Singlepage from "./Singlepage";
 import Storepage from "./Storepage";
-import AddProduct from "./AddProduct";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Cart from "./Cart";
 
-const Bottom = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-function MainScreen() {
+export default function MainScreen() {
   return (
     <>
-      <Bottom.Navigator screenOptions={{ headerTitle: "" }}>
-        <Bottom.Screen
-          name="Store"
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Icon name="shopping-bag" size={20} />
-            ),
-            tabBarLabelStyle: {
-              color: "black",
-            },
-          }}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          options={{ headerShown: false }}
           component={Storepage}
         />
-        <Bottom.Screen
-          name="Add"
-          component={AddProduct}
-          options={{
-            tabBarIcon: ({ color, size }) => <Icon name="plus" size={20} />,
-            tabBarLabelStyle: {
-              color: "black",
-            },
-          }}
+        <Stack.Screen
+          name="Cart"
+          options={{ headerBackVisible: true, headerBackTitleVisible: false }}
+          component={Cart}
         />
-      </Bottom.Navigator>
+        <Stack.Screen
+          name="Singlepage"
+          options={{ headerShown: false }}
+          component={Singlepage}
+        />
+      </Stack.Navigator>
     </>
   );
 }
-
-export default MainScreen;
