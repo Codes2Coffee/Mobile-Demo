@@ -1,28 +1,51 @@
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Storepage from "./screens/Storepage";
+import AddProduct from "./screens/AddProduct";
+import MainScreen from "./screens/MainScreen";
+import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainScreen from "./screens/MainScreen";
-import Cart from "./screens/Cart";
 
-const Stack = createNativeStackNavigator();
-
+const Bottom = createBottomTabNavigator();
 export default function App() {
   return (
     <>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Main"
-            options={{ headerShown: false }}
-            component={MainScreen}
-          />
-          <Stack.Screen
-            name="Cart"
-            options={{ headerBackVisible: true, headerBackTitleVisible: false }}
-            component={Cart}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar style="auto" />
+        <NavigationContainer>
+          <Bottom.Navigator
+            screenOptions={{
+              headerShown: false,
+              tabBarActiveBackgroundColor: "rgba(0,0,0,0.1)",
+            }}
+          >
+            <Bottom.Screen
+              name="Store"
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="shopping-bag" size={20} />
+                ),
+                tabBarLabelStyle: {
+                  color: "black",
+                },
+              }}
+              component={MainScreen}
+            />
+            <Bottom.Screen
+              name="Add"
+              component={AddProduct}
+              options={{
+                tabBarIcon: ({ color, size }) => <Icon name="plus" size={20} />,
+                tabBarLabelStyle: {
+                  color: "black",
+                },
+              }}
+            />
+          </Bottom.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
     </>
   );
 }
