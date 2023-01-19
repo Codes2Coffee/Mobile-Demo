@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-function Header({ text }) {
+function Header({ text, search }) {
   const navigate = useNavigation();
   return (
     <View style={style.root}>
@@ -30,11 +30,12 @@ function Header({ text }) {
           </Pressable>
         </View>
       </View>
-
-      <TextInput
-        style={style.searchBar}
-        placeholder="Search Store or Product"
-      />
+      {search && (
+        <TextInput
+          style={style.searchBar}
+          placeholder="Search Store or Product"
+        />
+      )}
     </View>
   );
 }

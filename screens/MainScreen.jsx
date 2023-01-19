@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SafeAreaView } from "react-native";
 import Singlepage from "./Singlepage";
 import Storepage from "./Storepage";
 import Cart from "./Cart";
+import Add from "./Add";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +24,11 @@ export default function MainScreen() {
           name="Singlepage"
           options={{ headerShown: false }}
           component={Singlepage}
+        />
+        <Stack.Screen
+          name="Add"
+          options={{ headerShown: false }}
+          component={Add}
         />
       </Stack.Navigator>
     </>
